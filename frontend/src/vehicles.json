@@ -1,0 +1,52 @@
+{
+  "vehicles": [
+    {
+      "plate": "AMB 101",
+      "type": "Type II Ambulance",
+      "capacity": "7",
+      "status": "Active",
+      "location": "Central Station",
+      "lastService": "Apr 10, 2025"
+    },
+    {
+      "plate": "AMB 102",
+      "type": "Type II Ambulance",
+      "capacity": "7",
+      "status": "Active",
+      "location": "East Side Station",
+      "lastService": "Apr 15 2025"
+    },
+    {
+      "plate": "AMB-103",
+      "type": "Type III Ambulance",
+      "capacity": "7",
+      "status": "Maintenance",
+      "location": "Maintenance Bay",
+      "lastService": "May 14, 2025"
+    },
+    {
+      "plate": "FT-201",
+      "type": "Pumper Truck",
+      "capacity": "7",
+      "status": "Out of Service",
+      "location": "Central Station",
+      "lastService": "Feb 28, 2025"
+    },
+    {
+      "plate": "FT-202",
+      "type": "Ladder Truck",
+      "capacity": "7",
+      "status": "Active",
+      "location": "North Station",
+      "lastService": "Apr 22, 2025"
+    },
+    {
+      "plate": "SUV-301",
+      "type": "Command SUV",
+      "capacity": "7",
+      "status": "Active",
+      "location": "HQ",
+      "lastService": "Mar 05, 2025"
+    }
+  ]
+}
