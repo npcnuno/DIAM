@@ -1,4 +1,4 @@
-import Login from "./components/home/Login";
+import Login from "./Login";
 
 function Home() {
   return (
@@ -9,3 +9,4 @@ function Home() {
 }
 
 export default Home;
+

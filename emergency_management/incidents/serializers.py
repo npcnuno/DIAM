@@ -1,20 +1,14 @@
 from rest_framework import serializers
-from .models import Incident
-from vehicles.models import Vehicle  # Add this line
-from users.serializers import UserSerializer
-from users.models import User
-from vehicles.serializers import VehicleSerializer
+from .models import TransportRequest
 
-class IncidentSerializer(serializers.ModelSerializer):
-    assigned_personnel = UserSerializer(many=True, read_only=True)
-    assigned_vehicle = VehicleSerializer(read_only=True)
-    assigned_vehicle_id = serializers.PrimaryKeyRelatedField(
-        queryset=Vehicle.objects.all(), source='assigned_vehicle', write_only=True
-    )
-    assigned_personnel_ids = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.filter(role='Personnel'), many=True, write_only=True, source='assigned_personnel'
-    )
-
+class TransportRequestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Incident
+        model = TransportRequest
         fields = '__all__'
+        read_only_fields = ['requester']
+
+    def validate_vehicle(self, value):
+        user = self.context['request'].user
+        if user.role == 'Operador' and value.base != user.base:
+            raise serializers.ValidationError("You can only select vehicles from your base.")
+        return value

@@ -1,0 +1,53 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "username": "admin",
+      "password": "95a0c278477734ffeb6f81adcef894e0a428830410ace415c347744e85ae51b6",
+      "email": "admin@example.com",
+      "first_name": "Admin",
+      "last_name": "User",
+      "is_staff": true,
+      "is_active": true,
+      "is_superuser": true,
+      "last_login": null,
+      "date_joined": "2023-01-01T00:00:00Z",
+      "role": "Administrator"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "username": "operador",
+      "password": "95a0c278477734ffeb6f81adcef894e0a428830410ace415c347744e85ae51b6",
+      "email": "operador@example.com",
+      "first_name": "Operador",
+      "last_name": "User",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "last_login": null,
+      "date_joined": "2023-01-01T00:00:00Z",
+      "role": "Operador"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "username": "pessoal",
+      "password": "95a0c278477734ffeb6f81adcef894e0a428830410ace415c347744e85ae51b6",
+      "email": "pessoal@example.com",
+      "first_name": "Pessoal",
+      "last_name": "User",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "last_login": null,
+      "date_joined": "2023-01-01T00:00:00Z",
+      "role": "Pessoal"
+    }
+  }
+]
