@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'users',
     'corsheaders',
     'incidents',
-    'messaging',
     'vehicles',
     'bases',
     'rest_framework_simplejwt',  # Added for JWT support

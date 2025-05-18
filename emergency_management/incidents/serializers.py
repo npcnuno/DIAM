@@ -9,6 +9,6 @@ class TransportRequestSerializer(serializers.ModelSerializer):
 
     def validate_vehicle(self, value):
         user = self.context['request'].user
-        if user.role == 'Operador' and value.base != user.base:
+        if (user.role == 'Operador' or  user.role == 'AdminOperator' or user.role == 'Pessoal') and value.base != user.base:
             raise serializers.ValidationError("You can only select vehicles from your base.")
         return value

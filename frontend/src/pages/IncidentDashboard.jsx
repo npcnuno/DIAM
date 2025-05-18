@@ -57,22 +57,28 @@ function IncidentsDashboard() {
         setError("Failed to load incidents.");
         setLoading(false);
       });
-  }, []); // Empty dependency array means it runs only once on mount
+  }, []);
 
-  // Fetch bases when modal opens
+  // Fetch bases with vehicles when modal opens
   useEffect(() => {
     if (modalOpen) {
-      Api.getBases()
+      Api.getINEMBase()
         .then((response) => {
-          setBases(response.data);
+          const basesWithVehicles = response.data.filter(
+            (base) => base.vehicles.length > 0,
+          );
+          setBases(
+            basesWithVehicles.map((base) => ({ id: base.id, name: base.name })),
+          );
         })
         .catch((error) => {
-          console.error("Error fetching bases:", error);
+          console.error("Error fetching base options:", error);
+          setError("Failed to load bases.");
         });
     }
-  }, [modalOpen]); // Runs whenever modalOpen changes
+  }, [modalOpen]);
 
-  // Early return for unauthorized users (after hooks)
+  // Early return for unauthorized users
   if (!user || !allowedRoles.includes(user.role)) {
     return <div className="text-red-500 p-6">Acesso negado.</div>;
   }
@@ -85,6 +91,7 @@ function IncidentsDashboard() {
       })
       .catch((error) => {
         console.error("Error fetching vehicles:", error);
+        setError("Failed to load vehicles.");
       });
   };
 
@@ -95,9 +102,9 @@ function IncidentsDashboard() {
       destination: formData.destination,
       patient_type: formData.patient_type,
       status: "Pendente",
-      vehicle: selectedVehicle,
-      base: selectedBase,
-      requester: user.id,
+      vehicle: selectedVehicle ? parseInt(selectedVehicle) : null,
+      base: selectedBase ? parseInt(selectedBase) : null,
+      requester: parseInt(user.id),
     };
     Api.createTransportRequest(incidentData)
       .then((response) => {

@@ -16,7 +16,23 @@ class Vehicle(models.Model):
     type = models.CharField(max_length=100, choices=TIPO_CHOICES)
     capacity = models.IntegerField()
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Disponível')
-    base = models.ForeignKey(BaseAmbulancia, on_delete=models.CASCADE, related_name='vehicles')
+    base = models.ForeignKey(BaseAmbulancia, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        # Save the vehicle first to ensure it has an ID and base is set
+        super().save(*args, **kwargs)
+        
+        # Count personnel at the base (assuming 'Pessoal' is the role for personnel)
+        personnel_count = User.objects.filter(base=self.base, role='Pessoal').count()
+        
+        # Update status based on personnel count vs. capacity
+        if personnel_count < self.capacity:
+            self.status = 'Manutenção'  # Vehicle disabled due to insufficient personnel
+        else:
+            self.status = 'Disponível'  # Vehicle available if personnel meets capacity
+        
+        # Save again with the updated status
+        super().save(update_fields=['status'])
 
     def __str__(self):
         return f"{self.type} - {self.base.name}"

@@ -38,7 +38,10 @@ function Signup() {
       localStorage.setItem("user", JSON.stringify(response.data.user));
       localStorage.setItem("base", response.data.base);
       alert("Signup successful!");
-      navigate("/dashboard");
+      if (role === "AdminBase" || role === "Pessoal")
+        navigate("/BaseDashboard");
+      if (role === "AdminOperator" || role === "Operator")
+        navigate("/OperatorDashboard");
     } catch (error) {
       alert(
         "Signup failed: " + (error.response?.data?.error || "Unknown error"),
